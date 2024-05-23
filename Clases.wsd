@@ -2,79 +2,90 @@
 
 
 class Cliente {
-    - id: int
-    - nombre: String
-    - tipoDocumento: String
-    - Documento: String
-    - correo: String
-    
-    + registrarCliente()
-    + seleccionarCliente()
-}
-
-class Proyecto {
   - id: int
   - nombre: String
-  - descripcion: String
-  - fechaInicio: Date
-  - fechaFin: Date
-  - estado: String
+  - tipoDocumento: String
+  - Documento: String
+  - correo: String
 
-  + agregarTareas()
-  + agregarObjetivos()
-  + agregarHitos()
+  + createCliente()
+  + updateCliente()
+  + DeleteCliente()
+  + getById()
 }
 
-class Miembros {
-  - id: int
-  - nombre: String
-  - correoElectronico: String
-  - rol: String
-  - UsuarioId: Usuarios
-
-  + agregarProyecto()
-}
-
-class Tareas {
-  - id: int
-  - nombre: String
-  - descripcion: String
-  - estado: String
-  - fechaVencimiento: Date
-  - prioridad: String
-
-  + cambiarEstado()
-  + notificarTarea()
-}
-
-class Objetivos {
-  - id: int
-  - descripcion: String
-  - fechaObjetivo: Date
-
-  + marcarObjetivo()
-}
-
-class Hitos {
-  - id: int
-  - descripcion: String
-  - fechaHito: Date
-
-  + marcarComoCompletad()
-}
-
-class RegistroHistorial {
-  - id: int
+class FacturaCliente {
+  - numeroFactura: int
   - fecha: Date
-  - Usuarios: Miembros
-  - accion: String
-  - detalle: String
+  - clienteId: Cliente
 
-  + consultarHistorial()
+  + create()
+  + update()
+  + delete()
+  + getById()
 }
 
-Usuarios -- Miembros
-Miembros o-- Proyecto
+class DetalleFactura {
+  - id: int
+  - cantidad: int
+  - productoCodigo: Producto
+  - valorBruto: float
+  - valorNeto: float
+  - valorDescruento: float
+  - valorTotal:float
+  - facturaClienteId:FacturaCliente
+  + create()
+  + update()
+  + delete()
+  + get()
+}
+
+class Producto {
+  - Id: int
+  - codigo: String
+  - nombre: String
+  - categoria: String
+  - valor: float
+  
+  + create()
+  + update()
+  + delete()
+  + get()
+}
+
+
+class inventario {
+  - codigo: int
+  - stock : String
+  - fechaIngreso: Date
+  - valorDescuento: float
+  -porcentajeIva: float
+
+  + REgistrarEntrada()
+  + update()
+  + delete()
+  + get()
+  
+}
+class inventarioSalida {
+  - id : int
+  - codigo: inventario
+  - fechaSalida: Date
+ 
+
+  + REgistrarSalida()
+  + update()
+  + delete()
+  + get()
+  
+}
+
+
+
+
+
+Cliente -- FacturaCliente
+FacturaCliente o--* DetalleFactura
 Proyecto *-- Tareas
 Proyecto *-- Objetivos
 Proyecto *-- Hitos
